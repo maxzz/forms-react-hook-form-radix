@@ -5,9 +5,26 @@
     <link rel="icon" type="image/svg+xml" href="./src/assets/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hook Form + Radix UI</title>
+    <style>
+        html {
+            background-color: #485167;
+        }
+        body {
+            animation: fadein 2.5s;
+        }
+        @keyframes fadein {
+            from {
+                background-color: #485167;
+            }
+            to {
+                background-color: transparent;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="root"></div>
+    <div id="portal" style="z-index: 50;"></div>
     <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>

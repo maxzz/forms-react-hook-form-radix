@@ -5,13 +5,13 @@ import { Section3_Footer } from "./components/Section3_Footer";
 export function App() {
     return (
         <div className="h-screen">
-            <div className="h-full bg-yellow-500 grid place-content-center">
+            <div className="h-full text-primary-400 bg-primary-900 grid grid-rows-[auto,1fr,auto]">
                 <Section1_Header />
 
-                <div className="min-w-[400px] min-h-[540px] bg-yellow-700">
+                <div className="bg-primary-700 grid place-content-center">
                     <Section2_Main />
                 </div>
-                
+
                 <Section3_Footer />
             </div>
         </div>

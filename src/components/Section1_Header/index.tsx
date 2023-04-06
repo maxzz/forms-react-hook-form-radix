@@ -1,5 +1,7 @@
 export function Section1_Header() {
-  return (
-    <div>index</div>
-  )
+    return (
+        <div className="px-4 py-3">
+            index
+        </div>
+    );
 }

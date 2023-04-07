@@ -17,6 +17,7 @@
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.43.9",
         "react-hot-toast": "^2.4.0",
+        "react-use": "^17.4.0",
         "simplebar-react": "^3.2.3",
         "valtio": "^1.10.4"
     },

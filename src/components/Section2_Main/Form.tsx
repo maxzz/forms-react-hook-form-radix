@@ -10,13 +10,14 @@ export function Form() {
             </div>
 
             {/* Body */}
-            <div className="px-4 py-4">
-                <input className="px-2 py-1 w-full" />
+            <div className="px-4 py-4 flex flex-col space-y-4">
+                <input className="px-2 py-1 w-full rounded-sm" autoComplete="off" list="autocompleteOff" spellCheck="false" />
+                <input className="px-2 py-1 w-full rounded-sm" autoComplete="off" list="autocompleteOff" spellCheck="false" />
             </div>
 
             {/* Buttons */}
             <div className="px-2 py-4 border-primary-500/50 border-t flex items-center justify-end">
-                <Button />
+                <Button>OK</Button>
             </div>
         </div>
     );

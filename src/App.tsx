@@ -17,7 +17,7 @@ export function App() {
             <UIToaster />
             <UISymbolDefs />
 
-            <div className="h-screen">
+            <div className="h-screen p-8">
                 <div className="h-full text-primary-400 bg-primary-900 grid grid-rows-[auto,1fr,auto]">
                     <Section1_Header />
                     <Section2_Main />

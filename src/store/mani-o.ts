@@ -1,6 +1,6 @@
 import { Mani } from "./mani";
 import { parseOptionsRead } from "./mani-i";
-import { showError } from "./mani-show-error";
+import { showError } from "./nun/mani-show-error";
 import { Transform } from "./mani-functions";
 import { J2xParser } from "@/utils/json2xml";
 

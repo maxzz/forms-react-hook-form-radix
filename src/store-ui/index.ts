@@ -15,6 +15,12 @@ const initialAppUi: AppUi = {
 
 export const appUi = proxy<AppUi>(loadStorageAppUi());
 
+setInitialDarkMode();
+
+function setInitialDarkMode() {
+    document.getElementsByTagName('body')[0].classList[appUi.dark ? 'add': 'remove']('dark');
+}
+
 // Local storage
 
 function loadStorageAppUi(): AppUi {

@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { appUi, useSnapshot } from "@/store-ui";
 import { DarkLightSwitch } from "./DarkLight";
 import { IconCiPen } from "../ui/icons/CustomIcons";
-import { appUi, useSnapshot } from "@/store-ui";
 
 const checkboxClasses = `
 form-checkbox 
@@ -11,11 +10,6 @@ rounded border-none cursor-pointer transition-all
 
 export function Section1_Header() {
     const state = useSnapshot(appUi);
-
-    useEffect(() => {
-        const body = document.getElementsByTagName('body')[0];
-        state.dark && body.classList.add('dark');
-     }, []);
 
     function changeMode() {
         const body = document.getElementsByTagName('body')[0];

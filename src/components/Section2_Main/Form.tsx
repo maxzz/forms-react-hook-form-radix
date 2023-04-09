@@ -6,7 +6,7 @@ type FormValues = {
     test: number;
 };
 
-const inputClasses = "px-2 py-1 w-full rounded-sm bg-purple-300";
+const inputClasses = "px-2 py-1 w-full rounded-sm bg-primary-200 dark:bg-primary-800";
 
 function Input({ control }: { control: Control<FormValues>; }) {
     const { field } = useController({
@@ -30,7 +30,9 @@ function Input({ control }: { control: Control<FormValues>; }) {
             }}
             onBlur={field.onBlur}
 
-            className={inputClasses} autoComplete="off" list="autocompleteOff" spellCheck="false"
+            //https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion#preventing_autofilling_with_autocompletenew-password
+            className={inputClasses} autoComplete="new-password" list="autocompleteOff" spellCheck="false"
+            // className={inputClasses} autoComplete="off" list="autocompleteOff" spellCheck="false"
         />
     );
 }

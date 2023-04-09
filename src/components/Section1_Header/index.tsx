@@ -2,12 +2,6 @@ import { appUi, useSnapshot } from "@/store-ui";
 import { DarkLightSwitch } from "./DarkLight";
 import { IconCiPen } from "../ui/icons/CustomIcons";
 
-const checkboxClasses = `
-form-checkbox 
-text-primary-700 bg-primary-800 ring-1 focus:ring-1 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400 
-rounded border-none cursor-pointer transition-all
-`;
-
 export function Section1_Header() {
     const state = useSnapshot(appUi);
 

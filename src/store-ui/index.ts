@@ -1,6 +1,6 @@
-import { mergeDefaultAndLoaded } from "@/utils";
 import { proxy, subscribe } from "valtio";
 export { useSnapshot } from 'valtio';
+import { mergeDefaultAndLoaded } from "@/utils";
 
 const STORAGE_KEY = 'forms-react-hook-form-radix-ui';
 const STORAGE_VER = 'v1';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { AllHTMLAttributes, HTMLAttributes, useEffect, useState } from 'react';
 import { Button } from './Controls';
 import { Control, useController, useForm } from 'react-hook-form';
 
@@ -7,15 +7,16 @@ type FormValues = {
 };
 
 const inputClasses = "px-2 py-1 w-full rounded-sm bg-primary-200 dark:bg-primary-800";
+const turnOffAutoComplete: AllHTMLAttributes<HTMLElement> = { autoComplete: "new-password", list: "autocompleteOff", spellCheck: "false", };
 
 function Input({ control }: { control: Control<FormValues>; }) {
     const { field } = useController({
         control,
         name: "test"
     });
-    const [value, setValue] = React.useState(String(field.value));
+    const [value, setValue] = useState(String(field.value));
 
-    React.useEffect(() => {
+    useEffect(() => {
         setValue(String(field.value));
     }, [field.value, setValue]);
 
@@ -30,9 +31,12 @@ function Input({ control }: { control: Control<FormValues>; }) {
             }}
             onBlur={field.onBlur}
 
+            className={inputClasses}
+
             //https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion#preventing_autofilling_with_autocompletenew-password
-            className={inputClasses} autoComplete="new-password" list="autocompleteOff" spellCheck="false"
-            // className={inputClasses} autoComplete="off" list="autocompleteOff" spellCheck="false"
+            //autoComplete="new-password" list="autocompleteOff" spellCheck="false"
+            {...turnOffAutoComplete}
+        // autoComplete="off" list="autocompleteOff" spellCheck="false"
         />
     );
 }
@@ -52,14 +56,14 @@ export function Form() {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="min-w-[400px] min-h-[540px] text-sm bg-primary-300 dark:bg-primary-900 grid grid-rows-[auto,1fr,auto]">
                 {/* Caption */}
-                <div className="px-2 py-4 bg-primary-800">
+                <div className="px-2 py-4 bg-primary-950">
                     Form Caption
                 </div>
 
                 {/* Body */}
                 <div className="p-4 flex flex-col space-y-4">
                     <Input control={control} />
-                    <input className={inputClasses} autoComplete="off" list="autocompleteOff" spellCheck="false" />
+                    <input className={inputClasses} {...turnOffAutoComplete} />
                     <input className={inputClasses} autoComplete="off" list="autocompleteOff" spellCheck="false" />
                 </div>
 

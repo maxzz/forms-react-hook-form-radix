@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DarkLightSwitch } from "./DarkLight";
+import { IconCiPen } from "../ui/icons/CustomIcons";
 
 const checkboxClasses = `
 form-checkbox 
@@ -18,13 +19,9 @@ export function Section1_Header() {
 
     return (
         <div className="px-4 py-3 flex items-center justify-between">
-            <div className="">logo</div>
+            <IconCiPen className="w-6 h-6 stroke-none fill-current -rotate-90" title="App logo"/>
 
             {/* Darlk mode switch */}
-            {/* <label className="flex items-center space-x-2">
-                <input className={checkboxClasses} type="checkbox" onClick={changeMode} />
-                <div className="select-none">{isDark ? 'set light' : 'set dark'}</div>
-            </label> */}
 
             <button className="p-1" title={isDark ? 'Set light mode' : 'Set dark mode'} onClick={changeMode}>
                 <DarkLightSwitch isDark={!isDark} />

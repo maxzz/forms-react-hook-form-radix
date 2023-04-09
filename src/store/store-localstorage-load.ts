@@ -1,7 +1,7 @@
 import { Order, SortBy, UISize } from "./store-types";
 
 export namespace LocalStorage {
-    export const KEY = 'pmit-01';
+    export const KEY = 'forms-react-hook-form-radix';
 
     export type Store = {
         vSplitPos: number;

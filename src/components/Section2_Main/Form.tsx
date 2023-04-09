@@ -3,15 +3,16 @@ import { Button } from './Controls';
 import { Control, Controller, UseControllerProps, useController, useForm } from 'react-hook-form';
 import { classNames } from '@/utils';
 
-type FormValues = {
+type ThisFormValues = {
     test: number;
     inputState: string;
+    submit: boolean;
 };
 
 const inputClasses = "px-2 py-1 w-full rounded-sm bg-primary-200 dark:bg-primary-800";
 const turnOffAutoComplete: AllHTMLAttributes<HTMLElement> = { autoComplete: "new-password", list: "autocompleteOff", spellCheck: "false", };
 
-function InputWithOwnState({ control }: { control: Control<FormValues>; }) {
+function InputWithOwnState({ control }: { control: Control<ThisFormValues>; }) {
     const { field } = useController({ control, name: "test", });
 
     const [value, setValue] = useState(String(field.value));
@@ -43,17 +44,34 @@ function InputWithOwnState({ control }: { control: Control<FormValues>; }) {
 //     );
 // }
 
-function InputWithController(props: UseControllerProps<FormValues>) {
-    const { field, fieldState } = useController(props);
+function InputWithController(props: UseControllerProps<ThisFormValues, "inputState">) {
+    const { field, fieldState } = useController<ThisFormValues, "inputState">(props);
     return (
         <div>
             <input {...field} placeholder={props.name} {...turnOffAutoComplete} className={inputClasses} />
             <div className="flex text-[.65rem] space-x-2">
                 <div className="">{fieldState.isTouched && "touched"}</div>
                 <div className={classNames(fieldState.isDirty && 'text-yellow-500')}>{fieldState.isDirty && "dirty"}</div>
-                <div className={classNames(fieldState.invalid && 'text-red-500')}>{fieldState.invalid ? "invalid" : "valid"}{fieldState.error && <span className=""> {fieldState.error.message}</span> }</div>
+                <div className={classNames(fieldState.invalid && 'text-red-500')}>{fieldState.invalid ? "invalid" : "valid"}{fieldState.error && <span className=""> {fieldState.error.message}</span>}</div>
                 <div className="">value: '{field.value}'</div>
             </div>
+        </div>
+    );
+}
+
+function Checkbox<T extends UseControllerProps>(props: T) {
+    const { field, fieldState } = useController(props);
+    return (
+        <div>
+            <input type="checkbox" {...field} placeholder={props.name} {...turnOffAutoComplete} className="
+                form-checkbox
+                rounded
+                bg-gray-200
+                border-transparent
+                focus:border-transparent focus:bg-gray-200
+                text-gray-700
+                focus:ring-1 focus:ring-offset-2 focus:ring-gray-500            
+            " />
         </div>
     );
 }
@@ -75,14 +93,15 @@ function InputWithController(props: UseControllerProps<FormValues>) {
 // }
 
 export function Form() {
-    const { control, handleSubmit, reset } = useForm<FormValues>({
+    const { control, handleSubmit, reset } = useForm<ThisFormValues>({
         defaultValues: {
             test: 0,
-            inputState: 'now'
+            inputState: 'now',
+            submit: true,
         }
     });
 
-    function onSubmit(data: FormValues) {
+    function onSubmit(data: ThisFormValues) {
         return console.log('submit data', data);
     }
 
@@ -105,6 +124,8 @@ export function Form() {
 
                     <input className={inputClasses} {...turnOffAutoComplete} />
                     <input className={inputClasses} {...turnOffAutoComplete} />
+
+                    <Checkbox name="submit" control={control as Control<ThisFormValues, "submit">} />
                 </div>
 
                 {/* Buttons */}

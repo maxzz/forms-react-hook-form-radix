@@ -48,7 +48,7 @@ function InputWithController(props: UseControllerProps<ThisFormValues, any>) {
     const { field, fieldState } = useController(props);
     console.log(`field:`, field);
     // console.log(`field.value: "${field.value}"`);
-    const val = '' + field.value;
+    const val = field.value || '';
     return (
         <div>
             <input {...field} placeholder={props.name} {...turnOffAutoComplete} className={inputClasses} />
@@ -62,7 +62,7 @@ function InputWithController(props: UseControllerProps<ThisFormValues, any>) {
                 </div>
 
                 {/* <div className="">value: '{field.value}'</div> */}
-                {/* <div className="">value: '{val}'</div> */}
+                <div className="">value: '{val}'</div>
                 {/* <div className="">value: '{JSON.stringify({a: field.value})}'</div> */}
             </div>
         </div>

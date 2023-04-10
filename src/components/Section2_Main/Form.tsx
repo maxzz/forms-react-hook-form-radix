@@ -62,8 +62,8 @@ function InputWithController(props: UseControllerProps<ThisFormValues, any>) {
                 </div>
 
                 {/* <div className="">value: '{field.value}'</div> */}
-                <div className="">value: '{val}'</div>
-                <div className="">value: '{JSON.stringify({a: field.value})}'</div>
+                {/* <div className="">value: '{val}'</div> */}
+                {/* <div className="">value: '{JSON.stringify({a: field.value})}'</div> */}
             </div>
         </div>
     );

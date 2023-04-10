@@ -4,9 +4,9 @@ import { Control, Controller, UseControllerProps, useController, useForm } from 
 import { classNames } from '@/utils';
 
 type ThisFormValues = {
-    test: number;
+    // test: number;
     inputState: string;
-    submit: boolean;
+    // submit: boolean;
 };
 
 const inputClasses = "px-2 py-1 w-full rounded-sm bg-primary-200 dark:bg-primary-800";
@@ -105,9 +105,9 @@ function Checkbox(props: UseControllerProps<ThisFormValues, any>) {
 export function Form() {
     const { control, handleSubmit, reset } = useForm<ThisFormValues>({
         defaultValues: {
-            test: 0,
+            // test: 0,
             inputState: 'now',
-            submit: true,
+            // submit: true,
         }
     });
 

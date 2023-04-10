@@ -44,26 +44,33 @@ function InputWithOwnState({ control }: { control: Control<ThisFormValues>; }) {
 //     );
 // }
 
-function InputWithController(props: UseControllerProps<ThisFormValues, "inputState">) {
-    const { field, fieldState } = useController<ThisFormValues, "inputState">(props);
+function InputWithController(props: UseControllerProps<ThisFormValues, any>) {
+    const { field, fieldState } = useController(props);
+    console.log(`field.value: "${field.value}"`);
+    const val = '' + field.value;
     return (
         <div>
             <input {...field} placeholder={props.name} {...turnOffAutoComplete} className={inputClasses} />
             <div className="flex text-[.65rem] space-x-2">
                 <div className="">{fieldState.isTouched && "touched"}</div>
                 <div className={classNames(fieldState.isDirty && 'text-yellow-500')}>{fieldState.isDirty && "dirty"}</div>
-                <div className={classNames(fieldState.invalid && 'text-red-500')}>{fieldState.invalid ? "invalid" : "valid"}{fieldState.error && <span className=""> {fieldState.error.message}</span>}</div>
-                <div className="">value: '{field.value}'</div>
+                <div className={classNames(fieldState.invalid && 'text-red-500')}>
+                    {fieldState.invalid ? "invalid" : "valid"}
+                    {fieldState.error && <span className=""> {fieldState.error.message}</span>}
+                </div>
+
+                {/* <div className="">value: '{field.value}'</div> */}
+                <div className="">value: '{val}'</div>
             </div>
         </div>
     );
 }
 
-function Checkbox<T extends UseControllerProps>(props: T) {
-    const { field, fieldState } = useController(props);
+function Checkbox(props: UseControllerProps<ThisFormValues, any>) {
+    const { field } = useController(props);
     return (
         <div>
-            <input type="checkbox" {...field} placeholder={props.name} {...turnOffAutoComplete} className="
+            <input type="checkbox" {...field} className="
                 form-checkbox
                 rounded
                 bg-gray-200
@@ -116,16 +123,18 @@ export function Form() {
 
                 {/* Body */}
                 <div className="p-4 flex flex-col space-y-4">
-                    <InputWithOwnState control={control} />
+                    {/* <InputWithOwnState control={control} /> */}
+                    <input className={inputClasses} {...turnOffAutoComplete} />
+
                     {/* <InputWithController name="inputState" control={control} rules={{ required: true }} /> */}
                     <InputWithController name="inputState" control={control} rules={{
                         validate: (value) => value === '1' || 'ERROR MESSAGE'
                     }} />
 
-                    <input className={inputClasses} {...turnOffAutoComplete} />
-                    <input className={inputClasses} {...turnOffAutoComplete} />
+                    {/* <input className={inputClasses} {...turnOffAutoComplete} />
+                    <input className={inputClasses} {...turnOffAutoComplete} /> */}
 
-                    <Checkbox name="submit" control={control as Control<ThisFormValues, "submit">} />
+                    <Checkbox name="submit" control={control} />
                 </div>
 
                 {/* Buttons */}

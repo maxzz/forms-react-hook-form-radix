@@ -46,11 +46,13 @@ function InputWithOwnState({ control }: { control: Control<ThisFormValues>; }) {
 
 function InputWithController(props: UseControllerProps<ThisFormValues, any>) {
     const { field, fieldState } = useController(props);
-    console.log(`field.value: "${field.value}"`);
+    console.log(`field:`, field);
+    // console.log(`field.value: "${field.value}"`);
     const val = '' + field.value;
     return (
         <div>
             <input {...field} placeholder={props.name} {...turnOffAutoComplete} className={inputClasses} />
+
             <div className="flex text-[.65rem] space-x-2">
                 <div className="">{fieldState.isTouched && "touched"}</div>
                 <div className={classNames(fieldState.isDirty && 'text-yellow-500')}>{fieldState.isDirty && "dirty"}</div>
@@ -61,6 +63,7 @@ function InputWithController(props: UseControllerProps<ThisFormValues, any>) {
 
                 {/* <div className="">value: '{field.value}'</div> */}
                 <div className="">value: '{val}'</div>
+                <div className="">value: '{JSON.stringify({a: field.value})}'</div>
             </div>
         </div>
     );
@@ -114,7 +117,7 @@ export function Form() {
 
     return (
         // <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="shadow dark:shadow-primary-500/20">
+        <form className="shadow dark:shadow-primary-500/20">
             <div className="min-w-[400px] min-h-[540px] text-sm bg-primary-300 dark:bg-primary-900 grid grid-rows-[auto,1fr,auto]">
                 {/* Caption */}
                 <div className="px-2 py-4 text-primary-800 dark:text-primary-400 bg-primary-400 dark:bg-primary-950">
@@ -124,17 +127,20 @@ export function Form() {
                 {/* Body */}
                 <div className="p-4 flex flex-col space-y-4">
                     {/* <InputWithOwnState control={control} /> */}
-                    <input className={inputClasses} {...turnOffAutoComplete} />
+                    {/* <input className={inputClasses} {...turnOffAutoComplete} /> */}
 
                     {/* <InputWithController name="inputState" control={control} rules={{ required: true }} /> */}
-                    <InputWithController name="inputState" control={control} rules={{
-                        validate: (value) => value === '1' || 'ERROR MESSAGE'
-                    }} />
+
+                    <InputWithController name="inputState" control={control}
+                        // rules={{
+                        //     validate: (value) => value === '1' || 'ERROR MESSAGE'
+                        // }}
+                    />
 
                     {/* <input className={inputClasses} {...turnOffAutoComplete} />
                     <input className={inputClasses} {...turnOffAutoComplete} /> */}
 
-                    <Checkbox name="submit" control={control} />
+                    {/* <Checkbox name="submit" control={control} /> */}
                 </div>
 
                 {/* Buttons */}
@@ -142,6 +148,6 @@ export function Form() {
                     <Button onClick={handleSubmit(onSubmit)}>OK</Button>
                 </div>
             </div>
-        </div>
+        </form>
     );
 }

@@ -1,12 +1,12 @@
 import React, { AllHTMLAttributes, HTMLAttributes, useEffect, useState } from 'react';
 import { Button } from './Controls';
-import { Control, Controller, UseControllerProps, useController, useForm } from 'react-hook-form';
+import { Control, Controller, FieldErrors, FieldValues, UseControllerProps, UseFormRegisterReturn, useController, useForm } from 'react-hook-form';
 import { classNames } from '@/utils';
 
 type ThisFormValues = {
     // test: number;
-    inputState: string;
-    // submit: boolean;
+    //inputState: string;
+    submit: boolean;
 };
 
 const inputClasses = "px-2 py-1 w-full rounded-sm bg-primary-200 dark:bg-primary-800";
@@ -30,12 +30,27 @@ function Checkbox({children, ...rest}: UseControllerProps<ThisFormValues, any> &
     );
 }
 
+export type SelectOption = {
+    label: React.ReactNode;
+    value: string | number | string[];
+};
+
+export function Select<T extends FieldValues>({ registered, errors, options }: { registered: UseFormRegisterReturn; errors?: FieldErrors<T>; options: SelectOption[]; }) {
+    return (
+        <select className="px-4 py-2 h-10 rounded" {...registered}>
+            {options.map(({ label, value }, idx) => (
+                <option value={value} key={idx}>{label}</option>
+            ))}
+        </select>
+    );
+}
+
 export function Form() {
     const { control, handleSubmit, reset } = useForm<ThisFormValues>({
         defaultValues: {
             // test: 0,
-            inputState: 'now',
-            // submit: true,
+            //inputState: 'now',
+            submit: true,
         }
     });
 

@@ -7,17 +7,16 @@ import { Select0, SelectOption } from './Controls/Select0';
 const inputClasses = "px-2 py-1 w-full rounded-sm bg-primary-200 dark:bg-primary-800";
 const turnOffAutoComplete: AllHTMLAttributes<HTMLElement> = { autoComplete: "new-password", list: "autocompleteOff", spellCheck: "false", };
 
+export const select0Options: SelectOption[] = [
+    { label: 'Ask - Reuse', value: '0' },
+    { label: 'Ask - Confirm', value: '1' },
+    { label: 'Ask Always', value: '2' },
+];
+
 export const select2Options: string[] = [
     'Ask - Reuse',
     'Ask - Confirm',
     'Ask Always',
-];
-
-
-export const selectOptions: SelectOption[] = [
-    { label: 'Ask - Reuse', value: '0' },
-    { label: 'Ask - Confirm', value: '1' },
-    { label: 'Ask Always', value: '2' },
 ];
 
 interface ThisFormValues extends FieldValues {
@@ -41,7 +40,7 @@ export function Form() {
 
     const { register, formState: { errors }, control, handleSubmit, reset } = formInstance;
 
-    function onSubmit(data: ThisFormValues) {
+    function onSubmit(data: FieldValues) {
         return console.log('submit data', data);
     }
 
@@ -64,7 +63,7 @@ export function Form() {
                     {/* <input className={inputClasses} {...turnOffAutoComplete} />
                     <input className={inputClasses} {...turnOffAutoComplete} /> */}
 
-                    <Select0 registered={register('value')} options={selectOptions} />
+                    <Select0 registered={register('value')} options={select0Options} />
 
                     <Select2 name="valueAs" control={control} options={select2Options} />
 

@@ -1,6 +1,6 @@
 import React, { AllHTMLAttributes, HTMLAttributes, useEffect, useState } from 'react';
 import { Button, Checkbox, Dropdown, Select2 } from './Controls';
-import { Control, Controller, FieldErrors, FieldValues, UseControllerProps, UseFormRegisterReturn, useController, useForm } from 'react-hook-form';
+import { Control, Controller, FieldErrors, FieldValues, UseControllerProps, UseFormRegister, UseFormRegisterReturn, useController, useForm } from 'react-hook-form';
 import { classNames } from '@/utils';
 import { Select0, SelectOption } from './Controls/Select0';
 
@@ -38,7 +38,9 @@ const defaultValues: ThisFormValues = {
 export function Form() {
     const formInstance = useForm<FieldValues>({ defaultValues, });
 
-    const { register, formState: { errors }, control, handleSubmit, reset } = formInstance;
+    const { register: registerAny, formState: { errors }, control, handleSubmit, reset } = formInstance;
+
+    const register = registerAny as unknown as UseFormRegister<ThisFormValues>;
 
     function onSubmit(data: FieldValues) {
         return console.log('submit data', data);

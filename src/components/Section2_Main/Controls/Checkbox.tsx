@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import { FieldValues, UseControllerProps, useController } from "react-hook-form";
+import { Control, FieldValues, UseControllerProps, useController } from "react-hook-form";
 
 function CheckboxControl({ name, control }: UseControllerProps<FieldValues, any>) {
     const { field } = useController({ name, control });
@@ -19,11 +19,11 @@ function CheckboxControl({ name, control }: UseControllerProps<FieldValues, any>
     );
 }
 
-export function Checkbox({ children, name, control, ...rest }: UseControllerProps<FieldValues, any> & HTMLAttributes<HTMLElement>) {
+export function Checkbox({ children, name, control, ...rest }: { name: string; control: Control<FieldValues, any>; } & HTMLAttributes<HTMLElement>) {
     return (
         <label className="flex items-center space-x-2">
             <CheckboxControl name={name} control={control} />
-            
+
             <div className="">
                 {children}
             </div>

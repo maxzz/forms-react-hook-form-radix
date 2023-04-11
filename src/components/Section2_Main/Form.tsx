@@ -68,8 +68,8 @@ const defaultValues: ThisFormValues = {
 };
 
 export function Form() {
-    const formInstance = useForm<ThisFormValues>({ defaultValues, });
-    
+    const formInstance = useForm({ defaultValues, });
+
     const { register, formState: { errors }, control, handleSubmit, reset } = formInstance;
 
     function onSubmit(data: ThisFormValues) {

@@ -1,28 +1,10 @@
 import React, { AllHTMLAttributes, HTMLAttributes, useEffect, useState } from 'react';
-import { Button, Dropdown } from './Controls';
+import { Button, Checkbox, Dropdown } from './Controls';
 import { Control, Controller, FieldErrors, FieldValues, UseControllerProps, UseFormRegisterReturn, useController, useForm } from 'react-hook-form';
 import { classNames } from '@/utils';
 
 const inputClasses = "px-2 py-1 w-full rounded-sm bg-primary-200 dark:bg-primary-800";
 const turnOffAutoComplete: AllHTMLAttributes<HTMLElement> = { autoComplete: "new-password", list: "autocompleteOff", spellCheck: "false", };
-
-function Checkbox({ children, ...rest }: UseControllerProps<ThisFormValues, any> & HTMLAttributes<HTMLElement>) {
-    const { field } = useController(rest);
-    return (
-        <label className="flex items-center space-x-2">
-            <input type="checkbox" {...field} className="
-                form-checkbox
-                rounded
-                bg-gray-200
-                border-transparent
-                focus:border-transparent focus:bg-gray-200
-                text-gray-700
-                focus:ring-1 focus:ring-offset-2 focus:ring-gray-500            
-            " />
-            <div className="">{children}</div>
-        </label>
-    );
-}
 
 export type SelectOption = {
     label: React.ReactNode;

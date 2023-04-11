@@ -1,6 +1,7 @@
 import { classNames } from "@/utils";
 import { HTMLAttributes } from "react";
 
+export * from './Checkbox';
 export * from './Dropdown';
 
 const checkboxClasses = `

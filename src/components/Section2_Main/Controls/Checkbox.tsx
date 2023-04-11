@@ -13,6 +13,7 @@ function CheckboxControl<T extends FieldValues>({ name, control }: UseController
         <input
             type="checkbox"
             {...field}
+            checked={field.value}
             className="
                 form-checkbox
                 text-gray-700 bg-gray-200

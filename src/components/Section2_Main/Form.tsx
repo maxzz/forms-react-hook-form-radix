@@ -1,5 +1,5 @@
 import React, { AllHTMLAttributes, HTMLAttributes, useEffect, useState } from 'react';
-import { Button, Checkbox, Dropdown, Select2 } from './Controls';
+import { Button, Checkbox, Dropdown, Select } from './Controls';
 import { Control, Controller, FieldErrors, FieldValues, UseControllerProps, UseFormRegister, UseFormRegisterReturn, useController, useForm } from 'react-hook-form';
 import { classNames } from '@/utils';
 import { Select0, SelectOption } from './Controls/Select0';
@@ -67,7 +67,7 @@ export function Form() {
 
                     <Select0 registered={register('value')} options={select0Options} />
 
-                    <Select2 name="valueAs" control={control} options={select2Options} />
+                    <Select name="valueAs" control={control} options={select2Options} />
 
                     <Checkbox name="submit" control={control}>
                         Submit now

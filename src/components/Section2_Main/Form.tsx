@@ -2,24 +2,10 @@ import React, { AllHTMLAttributes, HTMLAttributes, useEffect, useState } from 'r
 import { Button, Checkbox, Dropdown, Select2 } from './Controls';
 import { Control, Controller, FieldErrors, FieldValues, UseControllerProps, UseFormRegisterReturn, useController, useForm } from 'react-hook-form';
 import { classNames } from '@/utils';
+import { Select0, SelectOption } from './Controls/Select0';
 
 const inputClasses = "px-2 py-1 w-full rounded-sm bg-primary-200 dark:bg-primary-800";
 const turnOffAutoComplete: AllHTMLAttributes<HTMLElement> = { autoComplete: "new-password", list: "autocompleteOff", spellCheck: "false", };
-
-export type SelectOption = {
-    label: React.ReactNode;
-    value: string | number | string[];
-};
-
-export function Select<T extends FieldValues>({ registered, errors, options }: { registered: UseFormRegisterReturn; errors?: FieldErrors<T>; options: SelectOption[]; }) {
-    return (
-        <select className="px-4 py-2 h-10 rounded" {...registered}>
-            {options.map(({ label, value }, idx) => (
-                <option value={value} key={idx}>{label}</option>
-            ))}
-        </select>
-    );
-}
 
 export const select2Options: string[] = [
     'Ask - Reuse',
@@ -78,7 +64,7 @@ export function Form() {
                     {/* <input className={inputClasses} {...turnOffAutoComplete} />
                     <input className={inputClasses} {...turnOffAutoComplete} /> */}
 
-                    <Select registered={register('value')} options={selectOptions} />
+                    <Select0 registered={register('value')} options={selectOptions} />
 
                     <Select2 name="valueAs" control={control} options={select2Options} />
 

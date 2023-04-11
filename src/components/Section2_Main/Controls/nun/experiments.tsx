@@ -4,7 +4,7 @@ import { Control, Controller, UseControllerProps, useController, useForm } from 
 import { classNames } from '@/utils';
 
 type ThisFormValues = {
-    // test: number;
+    test: number;
     inputState: string;
     // submit: boolean;
 };
@@ -12,32 +12,33 @@ type ThisFormValues = {
 const inputClasses = "px-2 py-1 w-full rounded-sm bg-primary-200 dark:bg-primary-800";
 const turnOffAutoComplete: AllHTMLAttributes<HTMLElement> = { autoComplete: "new-password", list: "autocompleteOff", spellCheck: "false", };
 
-// function InputWithOwnState({ control }: { control: Control<ThisFormValues>; }) {
-//     const { field } = useController({ control, name: "test", });
+function InputWithOwnState({ control }: { control: Control<ThisFormValues>; }) {
+    const { field } = useController({ control, name: "test", });
 
-//     const [value, setValue] = useState(String(field.value));
+    const [value, setValue] = useState(String(field.value));
 
-//     useEffect(() => {
-//         setValue(String(field.value));
-//     }, [field.value, setValue]);
+    useEffect(() => {
+        setValue(String(field.value));
+    }, [field.value, setValue]);
 
-//     return (
-//         <input
-//             ref={field.ref}
-//             value={value}
-//             type="number"
-//             onChange={(e) => {
-//                 field.onChange(parseInt(e.target.value, 10) || 0); // send data to hook form
-//                 setValue(e.target.value);
-//             }}
-//             onBlur={field.onBlur}
+    return (
+        <input
+            type="number"
+            ref={field.ref}
+            value={value}
+            onChange={(e) => {
+                const newValue = e.target.value;
+                field.onChange(parseInt(newValue, 10) || 0); // send data to hook form
+                setValue(newValue);
+            }}
+            onBlur={field.onBlur}
 
-//             className={inputClasses}
+            className={inputClasses}
 
-//             {...turnOffAutoComplete}
-//         />
-//     );
-// }
+            {...turnOffAutoComplete}
+        />
+    );
+}
 
 // function InputWithController({ control }: { control: Control<FormValues>; }) {
 //     return (
@@ -105,7 +106,7 @@ function Checkbox(props: UseControllerProps<ThisFormValues, any>) {
 export function Form() {
     const { control, handleSubmit, reset } = useForm<ThisFormValues>({
         defaultValues: {
-            // test: 0,
+            test: 0,
             inputState: 'now',
             // submit: true,
         }
@@ -132,9 +133,9 @@ export function Form() {
                     {/* <InputWithController name="inputState" control={control} rules={{ required: true }} /> */}
 
                     <InputWithController name="inputState" control={control}
-                        // rules={{
-                        //     validate: (value) => value === '1' || 'ERROR MESSAGE'
-                        // }}
+                    // rules={{
+                    //     validate: (value) => value === '1' || 'ERROR MESSAGE'
+                    // }}
                     />
 
                     {/* <input className={inputClasses} {...turnOffAutoComplete} />

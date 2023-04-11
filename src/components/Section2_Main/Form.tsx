@@ -51,7 +51,7 @@ export const selectOptions: SelectOption[] = [
     { label: 'Ask Always', value: '2' },
 ];
 
-type ThisFormValues = {
+interface ThisFormValues extends FieldValues {
     // test: number;
     //inputState: string;
     value: string;
@@ -59,16 +59,18 @@ type ThisFormValues = {
     valueAs: number;
 };
 
+const defaultValues: ThisFormValues = {
+    // test: 0,
+    //inputState: 'now',
+    value: '0',
+    submit: true,
+    valueAs: 0,
+};
+
 export function Form() {
-    const { register, formState: { errors }, control, handleSubmit, reset } = useForm<ThisFormValues>({
-        defaultValues: {
-            // test: 0,
-            //inputState: 'now',
-            value: '0',
-            submit: true,
-            valueAs: 0,
-        }
-    });
+    const formInstance = useForm<ThisFormValues>({ defaultValues, });
+    
+    const { register, formState: { errors }, control, handleSubmit, reset } = formInstance;
 
     function onSubmit(data: ThisFormValues) {
         return console.log('submit data', data);

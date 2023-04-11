@@ -9,12 +9,11 @@ function CheckboxControl({ name, control }: UseControllerProps<FieldValues, any>
             {...field}
             className="
                 form-checkbox
-                rounded
-                bg-gray-200
+                text-gray-700 bg-gray-200
                 border-transparent
                 focus:border-transparent focus:bg-gray-200
-                text-gray-700
                 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500
+                rounded
                 "
         />
     );
@@ -24,7 +23,10 @@ export function Checkbox({ children, name, control, ...rest }: UseControllerProp
     return (
         <label className="flex items-center space-x-2">
             <CheckboxControl name={name} control={control} />
-            <div className="">{children}</div>
+            
+            <div className="">
+                {children}
+            </div>
         </label>
     );
 }

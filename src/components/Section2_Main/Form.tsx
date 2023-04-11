@@ -36,11 +36,9 @@ const defaultValues: ThisFormValues = {
 };
 
 export function Form() {
-    const formInstance = useForm<FieldValues>({ defaultValues, });
+    const formInstance = useForm({ defaultValues, });
 
-    const { register: registerAny, formState: { errors }, control, handleSubmit, reset } = formInstance;
-
-    const register = registerAny as unknown as UseFormRegister<ThisFormValues>;
+    const { register, formState: { errors }, control, handleSubmit, reset } = formInstance;
 
     function onSubmit(data: FieldValues) {
         return console.log('submit data', data);
@@ -69,7 +67,7 @@ export function Form() {
 
                     <Select name="valueAs" control={control} options={select2Options} />
 
-                    <Checkbox name="submit" control={control}>
+                    <Checkbox<ThisFormValues> name="submit" control={control}>
                         Submit now
                     </Checkbox>
                 </div>

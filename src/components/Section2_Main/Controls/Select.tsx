@@ -1,7 +1,7 @@
 import { FieldValues, UseControllerProps, useController } from "react-hook-form";
 import { Dropdown } from "./Dropdown";
 
-export function Select({ options, name, control }: UseControllerProps<FieldValues, any> & { options: string[]; }) {
+export function Select<T extends FieldValues>({ options, name, control }: UseControllerProps<T, any> & { options: string[]; }) {
     const { field } = useController({ name, control, });
 
 

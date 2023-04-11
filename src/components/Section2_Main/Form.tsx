@@ -1,5 +1,5 @@
 import React, { AllHTMLAttributes, HTMLAttributes, useEffect, useState } from 'react';
-import { Button, Checkbox, Dropdown } from './Controls';
+import { Button, Checkbox, Dropdown, Select2 } from './Controls';
 import { Control, Controller, FieldErrors, FieldValues, UseControllerProps, UseFormRegisterReturn, useController, useForm } from 'react-hook-form';
 import { classNames } from '@/utils';
 
@@ -27,23 +27,6 @@ export const select2Options: string[] = [
     'Ask Always',
 ];
 
-export function Select2({ options, name, control }: UseControllerProps<ThisFormValues, any> & { options: string[]; }) {
-    const { field } = useController({ name, control, });
-
-
-    return (<>
-        <Dropdown
-            items={options}
-            selectedIndex={field.value === undefined ? 0 : field.value}
-            onSetIndex={(idx: number) => {
-                console.log('selected', idx);
-                field.onChange(idx);
-            }}
-        />
-        <div className=""></div>
-    </>);
-}
-
 
 export const selectOptions: SelectOption[] = [
     { label: 'Ask - Reuse', value: '0' },
@@ -68,7 +51,7 @@ const defaultValues: ThisFormValues = {
 };
 
 export function Form() {
-    const formInstance = useForm({ defaultValues, });
+    const formInstance = useForm<FieldValues>({ defaultValues, });
 
     const { register, formState: { errors }, control, handleSubmit, reset } = formInstance;
 

@@ -1,8 +1,7 @@
 import React, { AllHTMLAttributes, HTMLAttributes, useEffect, useState } from 'react';
-import { Button } from './Controls';
+import { Button, Dropdown } from './Controls';
 import { Control, Controller, FieldErrors, FieldValues, UseControllerProps, UseFormRegisterReturn, useController, useForm } from 'react-hook-form';
 import { classNames } from '@/utils';
-import { Dropdown } from './Controls/Dropdown';
 
 const inputClasses = "px-2 py-1 w-full rounded-sm bg-primary-200 dark:bg-primary-800";
 const turnOffAutoComplete: AllHTMLAttributes<HTMLElement> = { autoComplete: "new-password", list: "autocompleteOff", spellCheck: "false", };
@@ -46,14 +45,17 @@ export const select2Options: string[] = [
     'Ask Always',
 ];
 
-export function Select2({ children, ...rest }: UseControllerProps<ThisFormValues, any> & HTMLAttributes<HTMLElement>) {
-    //const { field } = useController({ control, name: "test", });
+export function Select2({ options, name, control }: UseControllerProps<ThisFormValues, any> & { options: string[]; }) {
+    const { field } = useController({ name, control, });
+
+
     return (<>
         <Dropdown
-            items={select2Options}
-            selectedIndex={1}
+            items={options}
+            selectedIndex={field.value === undefined ? 0 : field.value}
             onSetIndex={(idx: number) => {
                 console.log('selected', idx);
+                field.onChange(idx);
             }}
         />
         <div className=""></div>
@@ -72,6 +74,7 @@ type ThisFormValues = {
     //inputState: string;
     value: string;
     submit: boolean;
+    valueAs: number;
 };
 
 export function Form() {
@@ -81,6 +84,7 @@ export function Form() {
             //inputState: 'now',
             value: '0',
             submit: true,
+            valueAs: 0,
         }
     });
 
@@ -107,7 +111,9 @@ export function Form() {
                     {/* <input className={inputClasses} {...turnOffAutoComplete} />
                     <input className={inputClasses} {...turnOffAutoComplete} /> */}
 
-                    <Select options={selectOptions} registered={register('value')} />
+                    <Select registered={register('value')} options={selectOptions} />
+
+                    <Select2 name="valueAs" control={control} options={select2Options} />
 
                     <Checkbox name="submit" control={control}>
                         Submit now
